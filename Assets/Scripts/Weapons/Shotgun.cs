@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shotgun : Weapons
 {
-    [SerializeField] private GameObject effect;
+    [SerializeField] private GameObject _effect;
     public int DamageValue
     {
         get
@@ -90,7 +90,7 @@ public class Shotgun : Weapons
 
         DealDamage();
 
-        effect.gameObject.SetActive(true);
+        _effect.gameObject.SetActive(true);
 
         _animator.Play("SHOTGUN_fire");
 
@@ -98,7 +98,7 @@ public class Shotgun : Weapons
 
         yield return new WaitForSeconds(shootDelays[0]);
 
-        effect.gameObject.SetActive(false);
+        _effect.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(shootDelays[1]);
 

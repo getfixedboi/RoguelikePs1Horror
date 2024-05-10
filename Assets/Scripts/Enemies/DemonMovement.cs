@@ -16,7 +16,6 @@ public class DemonMovement : BaseEnemy
 	}
 	void Start()
 	{
-		anim = GetComponent<Animator>();
 		hIdles = Animator.StringToHash("Idles");
 		hAttack = Animator.StringToHash("Attack");
 	}
@@ -44,14 +43,14 @@ public class DemonMovement : BaseEnemy
 
 	public void Attack()
 	{
-		StartCoroutine(Attackool());
+		StartCoroutine(C_Attack());
 		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idles"))
 		{
 			anim.SetBool(hIdles, false);
 			anim.SetBool(hAttack, true);
 		}
 	}
-	public IEnumerator Attackool()
+	public IEnumerator C_Attack()
 	{
 		isAttacking = true;
 		yield return new WaitForSeconds(2f);

@@ -13,11 +13,13 @@ public abstract class BaseEnemy : MonoBehaviour
     public Transform target;
     public NavMeshAgent agent;
     public Animator anim;
+    public bool isDead = false;
 
     public virtual void Awake()
     {
         currentHp = maxHP;
         target = GameObject.FindWithTag("Player").transform;
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
     public virtual void TakeDamage(int damage)
@@ -25,7 +27,8 @@ public abstract class BaseEnemy : MonoBehaviour
         currentHp-=damage;
         if(currentHp<=0)
         {
-            Destroy(gameObject,2f);
+            isDead = true;
+            Destroy(gameObject,.5f);
         }
     }
 }
