@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerStatictics : MonoBehaviour
 {
-    [Range(1,200)] public int maxHP;
+    [Range(1,200)] public int baseHP;
     #region items parameters
+    public static int bonusHP;
     public static int currentHp;
     public  int baseDamage;
     public static int bonusDamage;
@@ -15,18 +17,13 @@ public class PlayerStatictics : MonoBehaviour
     #endregion
     public Weapons currentWeapon;
     public Text hpText;
-
     #region items
-    
+    public HashSet<BaseItemBehaviour> PlayerItems;
     #endregion
     public void Awake()
     {
-        currentHp = maxHP;
+        currentHp = baseHP+bonusHP;
         hpText.text = $"HP: {currentHp} ";
-    }
-    public void SetDamage()
-    {
-
     }
     public void TakeDamage(int damage)
     {

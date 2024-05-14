@@ -1,9 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using System;
-using Unity.VisualScripting;
-using System.Runtime.InteropServices.WindowsRuntime;
-
+[RequireComponent(typeof(BoxCollider))]
 public abstract class Interactable : MonoBehaviour
 {
     public bool IsLastInteracted { get; protected set; }
