@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spider : BaseEnemy
 {
+    [SerializeField] private float attackCooldown;
     private bool isAttacking = false;
 
     public override void Awake()
@@ -14,7 +15,7 @@ public class Spider : BaseEnemy
     }
     public void Update()
     {
-        if (isAttacking) { return; }
+        if (isAttacking || isDead) { return; }
 
 		agent.SetDestination(target.position);
         
@@ -49,7 +50,7 @@ public class Spider : BaseEnemy
     {
         isAttacking = true;
         anim.Play("attack");
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
     }
     public override void TakeDamage(int damage)

@@ -28,7 +28,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if(currentHp<=0)
         {
             isDead = true;
-            Destroy(gameObject,.5f);
+            Destroy(gameObject,2f);
         }
     }
 }
