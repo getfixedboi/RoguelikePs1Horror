@@ -5,11 +5,14 @@ using UnityEngine;
 
 public abstract class BaseItemBehaviour : Interactable
 {
-    protected readonly static GameObject _player;
-    public int stack { get; protected set; }
-    static BaseItemBehaviour()
+    protected static GameObject player { private set; get; }
+    public int Stack { get; protected set; }
+    public int PreviousStack { get; protected set; }
+    public Sprite ItemSprite;
+    protected override void Awake()
     {
-        _player = GameObject.FindWithTag("Player");
+        base.Awake();
+        player = GameObject.FindWithTag("Player");
     }
     public override sealed void OnFocus()
     {
@@ -21,32 +24,38 @@ public abstract class BaseItemBehaviour : Interactable
     }
     public override sealed void OnInteract()
     {
-        OnGet(GetType());
+        OnGet(this.GetType());
         OnLoseFocus();
+        Destroy(gameObject);
     }
 
     public void OnGet(System.Type itemType)
     {
-        if (!_player.GetComponent(itemType))
+        if (!player.GetComponent(itemType))
         {
-            _player.AddComponent(itemType);
-            _player.GetComponent<PlayerStatictics>()?.PlayerItems.Add(this);
+            player.AddComponent(itemType);
+            player.GetComponent<PlayerStatictics>().PlayerItems.Add(this);
         }
-        var item = (BaseItemBehaviour)_player.GetComponent(itemType);
-        item.stack += 1;
-        ItemBehaviour();//update itemEffectBehaviour, that dependens on its stack count
+        var item = (BaseItemBehaviour)player.GetComponent(itemType);
+        item.Stack++;
+        item.PreviousStack = item.Stack-1;
+        item.ItemBehaviour();//update itemEffectBehaviour, that dependens on its stack count
+        player.GetComponent<PlayerStatictics>().UpdateItemsOutput();
 
         IsLastInteracted = true;
     }
 
     public void OnLoss()
     {
-        stack--;
+        Stack--;
+        PreviousStack = Stack-1;
         ItemBehaviour();//update itemEffectBehaviour, that dependens on its stack count
-
-        if(stack<=0)
+        player.GetComponent<PlayerStatictics>().UpdateItemsOutput();
+        
+        if (Stack <= 0)
         {
-            _player.GetComponent<PlayerStatictics>()?.PlayerItems.Remove(this);
+            player.GetComponent<PlayerStatictics>()?.PlayerItems.Remove(this);
+            player.GetComponent<PlayerStatictics>().UpdateItemsOutput();
             Destroy(this);
         }
     }

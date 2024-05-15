@@ -27,7 +27,7 @@ public class InteractRaycaster : MonoBehaviour
 
                     interactText.text = _interactable.InteractText;
 
-                    if (Input.GetKeyDown(KeyCode.F))
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
                         _interactable.OnInteract();
                     }
