@@ -34,6 +34,11 @@ public class PlayerStatictics : MonoBehaviour
     public void Update()
     {
         hpText.text = $"HP: {currentHp}/{baseHP + bonusHP} ";
+
+        if(Input.GetKey(KeyCode.Tab))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
     }
     public void TakeDamage(int damage)
     {
@@ -56,10 +61,8 @@ public class PlayerStatictics : MonoBehaviour
         // Начальная позиция для новых элементов
         Vector2 startPosition = Vector2.zero;
 
-        // Создаем новые элементы для каждого предмета в PlayerItems
         foreach (var item in PlayerItems)
         {
-            // Создаем новый UI элемент на Canvas из Prefab
             GameObject newItemUI = Instantiate(itemPrefab, _playerCanvas.transform);
 
             // Устанавливаем позицию нового элемента с учетом смещения
@@ -69,16 +72,16 @@ public class PlayerStatictics : MonoBehaviour
                 rectTransform.anchoredPosition = startPosition;
             }
 
-            // Получаем компоненты Image и Text из нового UI элемента
             Image image = newItemUI.GetComponent<Image>();
             Text text = newItemUI.GetComponentInChildren<Text>();
 
-            // Устанавливаем изображение и количество предмета
-
+            //Установка значений для префаба
             image.sprite = item.ItemSprite;
             System.Type itemType = item.GetType();
-            BaseItemBehaviour _temp = GetComponent(itemType) as BaseItemBehaviour;
+            BaseItemBehaviour _temp = GetComponent(itemType) as BaseItemBehaviour;//cнимаем компонент с игрока такого же типа
             text.text = _temp.Stack.ToString();
+
+            newItemUI.GetComponent<ShowItemDescription>().Item = _temp;//для вывода описания
 
             // Добавляем созданный UI элемент в список для последующего удаления
             itemUIElements.Add(newItemUI);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 312118419495183268}
   - component: {fileID: 9084020749189780826}
   - component: {fileID: 6753728317382465743}
+  - component: {fileID: 540928086359534537}
   m_Layer: 0
   m_Name: itemShowPrefab
   m_TagString: Untagged
@@ -76,6 +77,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &540928086359534537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657197408760249198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcc2b2a9b6b2f24584b97376b5cfde5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 0}
+  itemDescriptionPrefab: {fileID: 6616336579797561666, guid: c6885e4140471934ab20c0a5f20741e2, type: 3}
+  offset: {x: 0, y: -1000, z: 0}
 --- !u!1 &3841623427935699112
 GameObject:
   m_ObjectHideFlags: 0

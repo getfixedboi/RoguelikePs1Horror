@@ -7,6 +7,11 @@ public class testItem : BaseItemBehaviour
 {
     private int _baseValue = 10;
     private int _valuePerStack = 5;
+    protected override void Awake()
+    {
+        base.Awake();
+        itemDescription = "item 1";
+    }
     public override void ItemBehaviour()
     {
         //UnityEngine.Debug.Log($"{PreviousStack}/{Stack}");
