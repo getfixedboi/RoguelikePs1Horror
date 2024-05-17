@@ -8,7 +8,8 @@ public abstract class BaseItemBehaviour : Interactable
     protected static GameObject player { private set; get; }
     public int Stack { get; protected set; }
     public int PreviousStack { get; protected set; }
-    public string itemDescription;
+    [HideInInspector]
+    public string ItemDescription;
     public Sprite ItemSprite;
     protected override void Awake()
     {

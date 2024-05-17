@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ public abstract class BaseEnemy : MonoBehaviour
     public Animator anim;
     public bool isDead = false;
 
+    private static List<GameObject> _itemPool = new List<GameObject>();
+
     public virtual void Awake()
     {
         currentHp = maxHP;
@@ -22,13 +25,37 @@ public abstract class BaseEnemy : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
+
     public virtual void TakeDamage(int damage)
     {
-        currentHp-=damage;
-        if(currentHp<=0)
+        currentHp -= damage;
+        if (currentHp <= 0)
         {
             isDead = true;
-            Destroy(gameObject,2f);
+            Destroy(gameObject, 2f);
+        }
+    }
+
+    public void OnDestroy()
+    {
+        if (_itemPool != null && _itemPool.Count > 0)
+        {
+            int index = UnityEngine.Random.Range(0, _itemPool.Count);
+            Instantiate(_itemPool[index], transform.position + new Vector3(0, 1, 0), transform.rotation);
+        }
+    }
+
+    public static void AddPrefabToList(params GameObject[] items)
+    {
+        foreach (var item in items)
+        {
+            if (item != null && !_itemPool.Contains(item))
+            {
+                if (item.GetComponent<BaseItemBehaviour>() != null)
+                {
+                    _itemPool.Add(item);
+                }
+            }
         }
     }
 }

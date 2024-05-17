@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class extraTestItems : BaseItemBehaviour
+public class SharpGlassItem : BaseItemBehaviour
 {
     private int _baseValue = 2;
     private int _valuePerStack = 1;
-    protected override void Awake()
+    SharpGlassItem()
     {
-        base.Awake();
-        itemDescription = "item 2";
+        ItemDescription = "Damage Up!";
     }
     public override void ItemBehaviour()
     {

@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Item: {fileID: 0}
-  itemDescriptionPrefab: {fileID: 6616336579797561666, guid: c6885e4140471934ab20c0a5f20741e2, type: 3}
-  offset: {x: 0, y: -1000, z: 0}
+  ItemDescriptionPrefab: {fileID: 6616336579797561666, guid: c6885e4140471934ab20c0a5f20741e2, type: 3}
+  Offset: {x: 0, y: -1000, z: 0}
 --- !u!1 &3841623427935699112
 GameObject:
   m_ObjectHideFlags: 0

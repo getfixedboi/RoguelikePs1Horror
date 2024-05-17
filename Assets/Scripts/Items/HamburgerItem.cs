@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testItem : BaseItemBehaviour
+public class HamburgerItem : BaseItemBehaviour
 {
     private int _baseValue = 10;
     private int _valuePerStack = 5;
-    protected override void Awake()
+    HamburgerItem()
     {
-        base.Awake();
-        itemDescription = "item 1";
+        ItemDescription = "Health Up!";
     }
     public override void ItemBehaviour()
     {

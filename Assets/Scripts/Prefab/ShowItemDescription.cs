@@ -6,40 +6,43 @@ using TMPro;
 public class ShowItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public BaseItemBehaviour Item;
-    public GameObject itemDescriptionPrefab;
-    private GameObject itemDescriptionInstance;
-
-    public Vector3 offset;
-
-    private Vector3 summ;
+    public GameObject ItemDescriptionPrefab;
+    private GameObject _itemDescriptionInstance;
+    public Vector3 Offset;
+    private Vector3 _totalVec;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Создаем экземпляр префаба описания предмета
-        itemDescriptionInstance = Instantiate(itemDescriptionPrefab);
+        _itemDescriptionInstance = Instantiate(ItemDescriptionPrefab);
 
         // Получаем компонент Text дочернего объекта префаба
-        TMP_Text descriptionText = itemDescriptionInstance.GetComponentInChildren<TMP_Text>();
+        TMP_Text descriptionText = _itemDescriptionInstance.GetComponentInChildren<TMP_Text>();
 
         // Устанавливаем текст описания предмета
-        descriptionText.text = Item.itemDescription;
+        descriptionText.text = Item.ItemDescription;
 
         // Устанавливаем позицию описания предмета рядом с курсором
-        RectTransform descriptionRect = itemDescriptionInstance.GetComponent<RectTransform>();
-        descriptionRect.position = summ;
+        RectTransform descriptionRect = _itemDescriptionInstance.GetComponent<RectTransform>();
+        descriptionRect.position = _totalVec;
 
         // Делаем описание предмета дочерним объектом канваса
-        itemDescriptionInstance.transform.SetParent(GameObject.Find("PlayerInterface").transform, false);
+        _itemDescriptionInstance.transform.SetParent(GameObject.Find("PlayerInterface").transform, false);
+    }
+
+    public void OnPointerStay(PointerEventData eventData)
+    {
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         // Удаляем экземпляр описания предмета при выходе курсора из объекта
-        Destroy(itemDescriptionInstance);
+        Destroy(_itemDescriptionInstance);
     }
 
     private void Update()
     {
-        summ = Input.mousePosition + offset;
+        _totalVec = Input.mousePosition + Offset;
     }
 }

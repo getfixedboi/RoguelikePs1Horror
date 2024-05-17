@@ -20,14 +20,25 @@ public class PlayerStatictics : MonoBehaviour
     public Weapons currentWeapon;
     public Text hpText;
     #region items
+    [HideInInspector]
     public HashSet<BaseItemBehaviour> PlayerItems;
-    #endregion
+    
+    [Header("Item prefabs")]
+    public List<GameObject> ItemPrefab;
+
+    [Header("Canvas show item prefabs")]
     public GameObject itemPrefab; // Prefab для создания элементов в Canvas
+
     private List<GameObject> itemUIElements = new List<GameObject>();
     private Vector2 itemOffset = new Vector2(150f, 0f); // Смещение для нового элемента
-
+    #endregion
     public void Awake()
     {
+        foreach (var item in ItemPrefab)
+        {
+            BaseEnemy.AddPrefabToList(item);
+        }
+
         PlayerItems = new HashSet<BaseItemBehaviour>();
         currentHp = baseHP + bonusHP;
     }
@@ -35,10 +46,11 @@ public class PlayerStatictics : MonoBehaviour
     {
         hpText.text = $"HP: {currentHp}/{baseHP + bonusHP} ";
 
-        if(Input.GetKey(KeyCode.Tab))
+        if (!Input.GetKey(KeyCode.Tab))
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            return;
         }
+        Cursor.lockState = CursorLockMode.Confined;
     }
     public void TakeDamage(int damage)
     {
