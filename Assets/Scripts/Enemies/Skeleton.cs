@@ -14,7 +14,9 @@ public class Skeleton : BaseEnemy
 
     public void Update()
     {
-        if (isAttacking || isDead || isTakingDamage) { return; }
+        if (isAttacking){ return; }
+        if (isDead) { return; }
+        if(isTakingDamage) { return; }
 
         agent.SetDestination(target.position);
 
