@@ -15,6 +15,8 @@ public abstract class BaseItemBehaviour : Interactable
     {
         base.Awake();
         player = GameObject.FindWithTag("Player");
+
+        Destroy(gameObject,12f);
     }
     public override sealed void OnFocus()
     {
