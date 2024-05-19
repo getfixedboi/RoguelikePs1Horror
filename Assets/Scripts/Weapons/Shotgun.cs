@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shotgun : Weapons
 {
+    public Image AmmoBar;
+    public Text extraAmmoText;
+    [Space]
     [SerializeField] private GameObject _effect;
     public int DamageValue
     {
@@ -33,10 +37,20 @@ public class Shotgun : Weapons
     }
     protected override void Awake()
     {
+        DamageValue = PlayerStatictics.baseDamage+PlayerStatictics.bonusDamage;
+        AmmoValue = PlayerStatictics.baseAmmo + PlayerStatictics.bonusAmmo;
         base.Awake();
     }
     protected override void Update()
     {
+        DamageValue = PlayerStatictics.baseDamage+PlayerStatictics.bonusDamage;
+        AmmoValue = PlayerStatictics.baseAmmo + PlayerStatictics.bonusAmmo;
+
+        AmmoBar.fillAmount = (float)_currMagazineSize /  (float)AmmoValue;
+        extraAmmoText.text = $"{_currMagazineSize}/{AmmoValue}";
+
+        BarChangeColor();
+
         if (!_isShoot && !_isReload)
         {
             if (Input.GetButton("Fire1") && _currMagazineSize >= 1)
@@ -105,5 +119,20 @@ public class Shotgun : Weapons
         _isShoot = false;
     }
 
-
+    private void BarChangeColor()
+    {
+        if(_currMagazineSize>=AmmoValue*0.6f)
+        {
+            AmmoBar.color = Color.green;
+        }
+        else if(_currMagazineSize<=(float)AmmoValue*0.6f && _currMagazineSize>(float)AmmoValue*0.25f)
+        {
+            AmmoBar.color = Color.yellow;
+        }
+        else
+        {
+            AmmoBar.color = Color.red;
+        }
+        
+    }
 }

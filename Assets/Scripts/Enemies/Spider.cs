@@ -31,11 +31,17 @@ public class Spider : BaseEnemy
         {
             anim.Play("idle");
         }
-        
+
         if (agent.remainingDistance == 0)
         {
             return;
         }
+
+        if(isAttacking)
+        {
+            return;
+        }
+
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Attack();
@@ -48,7 +54,7 @@ public class Spider : BaseEnemy
     {
         isAttacking = true;
         anim.Play("attack");
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(attackCooldown + 0.1f);
         isAttacking = false;
     }
     public override void TakeDamage(int damage)

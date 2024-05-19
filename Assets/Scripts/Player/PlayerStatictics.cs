@@ -10,15 +10,12 @@ public class PlayerStatictics : MonoBehaviour
     #region items parameters
     public static float bonusHP = 0;
     public float currentHp;
-    [Space]
-    public int baseDamage;
-    public static int bonusDamage;
-    [Space]
-    public int baseAmmo;
-    public static int bonusAmmo;
-    [Space]
-    public float baseSpeed;
-    public static float speedBonus;
+    public static int baseDamage=5;
+    public static int bonusDamage=0;
+    public static int baseAmmo=4;
+    public static int bonusAmmo=0;
+    public  static float baseSpeed=7;
+    public static float speedBonus=0;
     #endregion
     public Weapons currentWeapon;
     [Space]
@@ -53,7 +50,6 @@ public class PlayerStatictics : MonoBehaviour
     {
         hpBar.fillAmount = currentHp / baseHP + bonusHP;
         extraHpText.text = $"{currentHp}/{baseHP + bonusHP}";
-        UnityEngine.Debug.Log($"{currentHp}/{baseHP + bonusHP}={currentHp / baseHP + bonusHP}");
         if (!Input.GetKey(KeyCode.Tab))
         {
             return;

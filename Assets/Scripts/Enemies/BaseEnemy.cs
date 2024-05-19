@@ -38,6 +38,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     public void OnDestroy()
     {
+        if (UnityEngine.Random.Range(0f, 1f) >= BaseItemBehaviour.ItemDropChance)
         if (_itemPool != null && _itemPool.Count > 0)
         {
             int index = UnityEngine.Random.Range(0, _itemPool.Count);

@@ -11,6 +11,7 @@ public abstract class BaseItemBehaviour : Interactable
     [HideInInspector]
     public string ItemDescription;
     public Sprite ItemSprite;
+    public static readonly float ItemDropChance = 0.25f;
     protected override void Awake()
     {
         base.Awake();
@@ -35,6 +36,8 @@ public abstract class BaseItemBehaviour : Interactable
 
     public void OnGet(System.Type itemType)
     {
+        AllForStupidDB.Curcount+=1;
+        
         if (!player.GetComponent(itemType))
         {
             player.AddComponent(itemType);
@@ -64,4 +67,9 @@ public abstract class BaseItemBehaviour : Interactable
         }
     }
     public abstract void ItemBehaviour();
+
+    public void Update()
+    {
+        transform.Rotate(0,0,.3f);
+    }
 }

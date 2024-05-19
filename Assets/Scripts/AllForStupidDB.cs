@@ -5,13 +5,33 @@ using UnityEngine;
 public class AllForStupidDB : MonoBehaviour
 {
     #region time db
-    private float _bestTime;
-    private float _currentTryTotalTime;
-    private float _curtime;
+    private static float _bestTime = 0;
+    private float _curtime = 0;
+    public static float GetBestTime
+    {
+        get
+        {
+            return _bestTime;
+        }
+    }
     #endregion
     #region items count db
-    private int _bestCount;
-    private int _currentTryTotalCount;
-    private int _curcount;
+    private static int _bestCount = 0;
+    public static int Curcount = 0;
+    public static int GetBestItemsCount
+    {
+        get
+        {
+            return _bestCount;
+        }
+    }
     #endregion
-}   
+
+    private void Update()
+    {
+        _curtime += Time.deltaTime;
+        _bestTime = _curtime > _bestTime ? _curtime : _bestTime;
+
+        _bestCount = Curcount > _bestCount ? Curcount : _bestCount;
+    }
+}
