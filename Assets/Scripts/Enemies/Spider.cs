@@ -17,13 +17,13 @@ public class Spider : BaseEnemy
     {
         if (isAttacking || isDead) { return; }
 
-		agent.SetDestination(target.position);
-        
+        agent.SetDestination(target.position);
+
         Vector3 _direction = target.position - transform.position;
         float angle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, angle + 180f, 0f);
 
-        if(agent.remainingDistance >= agent.stoppingDistance && !agent.pathPending)
+        if (agent.remainingDistance >= agent.stoppingDistance && !agent.pathPending)
         {
             anim.Play("walk");
         }
@@ -32,20 +32,18 @@ public class Spider : BaseEnemy
             anim.Play("idle");
         }
         
+        if (agent.remainingDistance == 0)
+        {
+            return;
+        }
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            Attack();
+            target.GetComponent<PlayerStatictics>().TakeDamage(20);
 
-		Vector3 direction = target.position - gameObject.transform.position;
-
-		RaycastHit hit;
-		if (Physics.Raycast(gameObject.transform.position, direction, out hit, agent.stoppingDistance + 1f))
-		{
-			if (hit.collider.gameObject.GetComponent<PlayerStatictics>())
-			{
-				Attack();
-				hit.collider.gameObject.GetComponent<PlayerStatictics>().TakeDamage(20);
-			}
-		}
+        }
     }
-    private void Attack()=>StartCoroutine(C_Attack());
+    private void Attack() => StartCoroutine(C_Attack());
     private IEnumerator C_Attack()
     {
         isAttacking = true;
@@ -57,7 +55,7 @@ public class Spider : BaseEnemy
     {
         base.TakeDamage(damage);
 
-        if(isDead)
+        if (isDead)
         {
             anim.Play("death");
         }

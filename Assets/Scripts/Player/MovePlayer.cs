@@ -79,7 +79,8 @@ public class MovePlayer : MonoBehaviour
     private Vector3 m_MoveInput;
     private Transform m_Tran;
     private Transform m_CamTran;
-
+    [Space]
+    public Image m_Image;
     public Text m_Text;
     private void Start()
     {
@@ -95,7 +96,8 @@ public class MovePlayer : MonoBehaviour
 
     private void Update()
     {
-        m_Text.text = Speed.ToString();
+        m_Image.fillAmount = Speed / 40;
+        m_Text.text = System.Math.Round(Speed,2).ToString();
         m_MoveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         m_MouseLook.UpdateCursorLock();
         QueueJump();

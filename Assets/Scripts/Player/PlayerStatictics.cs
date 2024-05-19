@@ -6,23 +6,28 @@ public class PlayerStatictics : MonoBehaviour
 {
     [SerializeField] private Canvas _playerCanvas;
     [Header("Base parameters")]
-    [Range(1, 200)] public int baseHP;
+    [Range(1, 200)] public float baseHP;
     #region items parameters
-    public static int bonusHP;
-    public static int currentHp;
+    public static float bonusHP = 0;
+    public float currentHp;
+    [Space]
     public int baseDamage;
     public static int bonusDamage;
+    [Space]
     public int baseAmmo;
     public static int bonusAmmo;
+    [Space]
     public float baseSpeed;
     public static float speedBonus;
     #endregion
     public Weapons currentWeapon;
-    public Text hpText;
+    [Space]
+    public Image hpBar;
+    public Text extraHpText;
     #region items
     [HideInInspector]
     public HashSet<BaseItemBehaviour> PlayerItems;
-    
+
     [Header("Item prefabs")]
     public List<GameObject> ItemPrefab;
 
@@ -41,11 +46,14 @@ public class PlayerStatictics : MonoBehaviour
 
         PlayerItems = new HashSet<BaseItemBehaviour>();
         currentHp = baseHP + bonusHP;
+
+        hpBar.fillAmount = 1f;
     }
     public void Update()
     {
-        hpText.text = $"HP: {currentHp}/{baseHP + bonusHP} ";
-
+        hpBar.fillAmount = currentHp / baseHP + bonusHP;
+        extraHpText.text = $"{currentHp}/{baseHP + bonusHP}";
+        UnityEngine.Debug.Log($"{currentHp}/{baseHP + bonusHP}={currentHp / baseHP + bonusHP}");
         if (!Input.GetKey(KeyCode.Tab))
         {
             return;
@@ -55,7 +63,7 @@ public class PlayerStatictics : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        hpText.text = $"HP: {currentHp} ";
+        hpBar.fillAmount = currentHp / baseHP + bonusHP;
         if (currentHp <= 0)
         {
             SceneManager.LoadScene(0);
