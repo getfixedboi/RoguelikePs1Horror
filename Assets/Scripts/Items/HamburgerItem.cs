@@ -12,9 +12,7 @@ public class HamburgerItem : BaseItemBehaviour
         ItemDescription = "Health Up!";
     }
     public override void ItemBehaviour()
-    {
-        //UnityEngine.Debug.Log($"{PreviousStack}/{Stack}");
-        //UnityEngine.Debug.Log($"{_baseValue * (PreviousStack <= 0 ? 0 : 1) + _valuePerStack * (PreviousStack <= 0 ? 0 : PreviousStack-1)}/{_baseValue + _valuePerStack * (Stack - 1)}");
+    {   
         PlayerStatictics.bonusHP -= _baseValue * (PreviousStack == 0 ? 0 : 1) + _valuePerStack * (PreviousStack <= 0 ? 0 : PreviousStack-1);
         PlayerStatictics.bonusHP += _baseValue + _valuePerStack * (Stack - 1);
     }
