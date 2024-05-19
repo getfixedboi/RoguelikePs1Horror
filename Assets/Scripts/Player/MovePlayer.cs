@@ -96,7 +96,7 @@ public class MovePlayer : MonoBehaviour
 
     private void Update()
     {
-        m_Image.fillAmount = Speed / 25;
+        m_Image.fillAmount = Speed / 35;
         m_Text.text = System.Math.Round(Speed,2).ToString();
         m_MoveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         m_MouseLook.UpdateCursorLock();
