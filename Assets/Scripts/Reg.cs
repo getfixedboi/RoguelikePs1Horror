@@ -15,9 +15,9 @@ public class Reg : MonoBehaviour
     [SerializeField] Text errorText;
     public static string dbName = "URI=file:playersData.db";
 
-    public string currentUser;
-    public float bestTime;
-    public int bestCount;
+    [HideInInspector] public static string currentUser;
+    [HideInInspector] public static float bestTime;
+    [HideInInspector] public static int bestCount;
 
     private void Start()
     {
@@ -104,7 +104,6 @@ public class Reg : MonoBehaviour
                                 }
                                 countReader.Close();
                             }
-
                             SceneManager.LoadScene(1);
                         }
                         else
@@ -170,6 +169,7 @@ public class Reg : MonoBehaviour
 
     public void SaveProgress()
     {
+        Debug.Log(currentUser);
         if (!string.IsNullOrEmpty(currentUser))
         {
             float bestTime = AllForStupidDB.GetBestTime;

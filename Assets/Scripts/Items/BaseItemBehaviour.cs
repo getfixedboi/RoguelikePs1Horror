@@ -36,7 +36,7 @@ public abstract class BaseItemBehaviour : Interactable
 
     public void OnGet(System.Type itemType)
     {
-        AllForStupidDB.Curcount+=1;
+        AllForStupidDB.CurCount+=1;
         
         if (!player.GetComponent(itemType))
         {

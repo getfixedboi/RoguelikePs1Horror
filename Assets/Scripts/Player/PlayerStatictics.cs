@@ -34,6 +34,8 @@ public class PlayerStatictics : MonoBehaviour
     private List<GameObject> itemUIElements = new List<GameObject>();
     private Vector2 itemOffset = new Vector2(150f, 0f); // Смещение для нового элемента
     #endregion
+    [Space]
+    public Reg reg;
     public void Awake()
     {
         foreach (var item in ItemPrefab)
@@ -45,6 +47,10 @@ public class PlayerStatictics : MonoBehaviour
         currentHp = baseHP + bonusHP;
 
         hpBar.fillAmount = 1f;
+    }
+    public void Start()
+    {
+        DestroyClone();
     }
     public void Update()
     {
@@ -62,6 +68,7 @@ public class PlayerStatictics : MonoBehaviour
         hpBar.fillAmount = currentHp / baseHP + bonusHP;
         if (currentHp <= 0)
         {
+            DestroyClone();
             SceneManager.LoadScene(0);
         }
     }
@@ -105,5 +112,21 @@ public class PlayerStatictics : MonoBehaviour
             // Обновляем начальную позицию для следующего элемента
             startPosition += itemOffset;
         }
+    }
+
+    public void DestroyClone()
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            // Проверяем, содержит ли имя объекта "(Clone)" в конце
+            if (obj.name.EndsWith("(Clone)"))
+            {
+                // Уничтожаем объект
+                Destroy(obj);
+            }
+        }
+        reg.SaveProgress();
     }
 }

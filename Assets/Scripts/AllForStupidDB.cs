@@ -28,7 +28,7 @@ public class AllForStupidDB : MonoBehaviour
         _bestCount = bestCount;
     }
     #endregion
-
+    
     private void Start()
     {
         _curTime = 0;
@@ -41,5 +41,10 @@ public class AllForStupidDB : MonoBehaviour
         _bestTime = _curTime > _bestTime ? _curTime : _bestTime;
 
         _bestCount = CurCount > _bestCount ? CurCount : _bestCount;
+
+        if(!Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            return;
+        }
     }
 }
