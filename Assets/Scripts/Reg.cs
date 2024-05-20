@@ -56,6 +56,7 @@ public class Reg : MonoBehaviour
 
     public void Login()
     {
+        bool A = false;
         if (Validation())
         {
             string username = usernameField.text;
@@ -104,7 +105,7 @@ public class Reg : MonoBehaviour
                                 }
                                 countReader.Close();
                             }
-                            SceneManager.LoadScene(1);
+                            A = true;
                         }
                         else
                         {
@@ -116,12 +117,17 @@ public class Reg : MonoBehaviour
                 }
 
                 connection.Close();
+                if(A)
+                {
+                    SceneManager.LoadScene(1);
+                }
             }
         }
     }
 
     public void Register()
     {
+        bool A = false;
         if (Validation())
         {
             string username = usernameField.text;
@@ -158,11 +164,14 @@ public class Reg : MonoBehaviour
                         command.ExecuteNonQuery();
 
                         Debug.Log("User best time and count initialized");
-                        SceneManager.LoadScene(1);
+                        A = true;
                     }
                 }
-
                 connection.Close();
+                if(A)
+                {
+                    SceneManager.LoadScene(1);
+                }
             }
         }
     }

@@ -69,6 +69,7 @@ public class PlayerStatictics : MonoBehaviour
         if (currentHp <= 0)
         {
             DestroyClone();
+            
             SceneManager.LoadScene(0);
         }
     }
