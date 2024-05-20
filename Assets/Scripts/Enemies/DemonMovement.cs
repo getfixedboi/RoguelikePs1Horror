@@ -35,7 +35,7 @@ public class DemonMovement : BaseEnemy
 			if (hit.collider.gameObject.GetComponent<PlayerStatictics>())
 			{
 				Attack();
-				hit.collider.gameObject.GetComponent<PlayerStatictics>().TakeDamage(20);
+				hit.collider.gameObject.GetComponent<PlayerStatictics>().TakeDamage(dealDamage);
 			}
 		}
 	}

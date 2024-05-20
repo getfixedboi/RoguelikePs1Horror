@@ -45,7 +45,7 @@ public class Spider : BaseEnemy
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Attack();
-            target.GetComponent<PlayerStatictics>().TakeDamage(20);
+            target.GetComponent<PlayerStatictics>().TakeDamage(dealDamage);
 
         }
     }
