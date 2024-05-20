@@ -53,6 +53,7 @@ public class Spider : BaseEnemy
     private IEnumerator C_Attack()
     {
         isAttacking = true;
+        agent.SetDestination(transform.position);
         anim.Play("attack");
         yield return new WaitForSeconds(attackCooldown + 0.1f);
         isAttacking = false;

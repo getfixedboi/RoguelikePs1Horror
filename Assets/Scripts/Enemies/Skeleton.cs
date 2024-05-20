@@ -48,6 +48,7 @@ public class Skeleton : BaseEnemy
     private IEnumerator C_Attack()
     {
         isAttacking = true;
+        agent.SetDestination(transform.position);
         anim.Play("attack");
         yield return new WaitForSeconds(3.3f);
         isAttacking = false;

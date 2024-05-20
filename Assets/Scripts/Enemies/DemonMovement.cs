@@ -53,6 +53,7 @@ public class DemonMovement : BaseEnemy
 	public IEnumerator C_Attack()
 	{
 		isAttacking = true;
+		agent.SetDestination(transform.position);
 		yield return new WaitForSeconds(2f);
 		anim.SetBool(hIdles, true);
 		anim.SetBool(hAttack, false);
