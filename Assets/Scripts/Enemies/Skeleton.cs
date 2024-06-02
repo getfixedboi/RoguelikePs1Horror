@@ -18,7 +18,10 @@ public class Skeleton : BaseEnemy
         if (isDead) { return; }
         if(isTakingDamage) { return; }
 
-        agent.SetDestination(target.position);
+        if (Vector3.Distance(transform.position, target.position) > agent.stoppingDistance)
+		{
+			agent.SetDestination(target.position);
+		}
 
         if (agent.remainingDistance >= agent.stoppingDistance && !agent.pathPending)
         {

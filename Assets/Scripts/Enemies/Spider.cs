@@ -17,7 +17,10 @@ public class Spider : BaseEnemy
     {
         if (isAttacking || isDead) { return; }
 
-        agent.SetDestination(target.position);
+        if (Vector3.Distance(transform.position, target.position) > agent.stoppingDistance)
+		{
+			agent.SetDestination(target.position);
+		}
 
         Vector3 _direction = target.position - transform.position;
         float angle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;

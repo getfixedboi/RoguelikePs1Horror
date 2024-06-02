@@ -25,7 +25,10 @@ public class DemonMovement : BaseEnemy
 	{
 		if (isAttacking) { return; }
 
-		agent.SetDestination(target.position);
+		if (Vector3.Distance(transform.position, target.position) > agent.stoppingDistance)
+		{
+			agent.SetDestination(target.position);
+		}
 
 		Vector3 direction = target.position - gameObject.transform.position;
 
