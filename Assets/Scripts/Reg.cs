@@ -19,6 +19,13 @@ public class Reg : MonoBehaviour
     [HideInInspector] public static float bestTime;
     [HideInInspector] public static int bestCount;
 
+    public GameObject fix;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     private void Start()
     {
         CreateDB();
@@ -119,7 +126,8 @@ public class Reg : MonoBehaviour
                 connection.Close();
                 if(A)
                 {
-                    SceneManager.LoadScene(1);
+                    fix.SetActive(true);
+                    Destroy(gameObject);
                 }
             }
         }
@@ -170,7 +178,8 @@ public class Reg : MonoBehaviour
                 connection.Close();
                 if(A)
                 {
-                    SceneManager.LoadScene(1);
+                    fix.SetActive(true);
+                    Destroy(gameObject);
                 }
             }
         }

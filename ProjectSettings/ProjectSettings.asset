@@ -693,11 +693,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: oldplace
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 006d20430bd8db01
   metroApplicationDescription: old place
   wsaImages: {}
   metroTileShortName: old place

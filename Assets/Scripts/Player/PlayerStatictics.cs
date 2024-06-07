@@ -69,7 +69,7 @@ public class PlayerStatictics : MonoBehaviour
         if (currentHp <= 0)
         {
             DestroyClone();
-            
+            AnotherFix.isFirstEnter=true;
             SceneManager.LoadScene(0);
         }
     }
